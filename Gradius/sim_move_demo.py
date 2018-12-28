@@ -206,6 +206,75 @@ class SimMoveDemo(QWidget):
         self.key_notifier.die()
         self.work.die()
 
+    # Metoda za ispaljivanje jedne od raketa
+    # Druge dve metode su skoro identične, potrebno objediniti sve u jednu metodu kasnije
+    def fire3(self):
+        print('RAKETA3')
+
+        # provera da li je raketa pogodila nekog od svemiraca
+        # ako jeste svemirac "sakriva"
+        if abs(self.label14.x() - self.label1.x()) < 40 and abs(self.label14.y() - self.label1.y()) < 40:
+            self.label1.hide()
+        if abs(self.label14.x() - self.label3.x()) < 40 and abs(self.label14.y() - self.label3.y()) < 40:
+            self.label3.hide()
+        if abs(self.label14.x() - self.label4.x()) < 40 and abs(self.label14.y() - self.label4.y()) < 40:
+            self.label4.hide()
+        if abs(self.label14.x() - self.label5.x()) < 40 and abs(self.label14.y() - self.label5.y()) < 40:
+            self.label5.hide()
+        if abs(self.label14.x() - self.label6.x()) < 40 and abs(self.label14.y() - self.label6.y()) < 40:
+            self.label6.hide()
+        if abs(self.label14.x() - self.label7.x()) < 40 and abs(self.label14.y() - self.label7.y()) < 40:
+            self.label7.hide()
+
+        # potrebno za prvo pozivanje metode - globalna promanljiva
+        if self.globalcounter3 == 0:
+            self.startposx3 = self.rec2.x()
+            self.startposy3 = self.rec2.y()
+        self.globalcounter3 = 1
+
+        self.globalcounter23 += 1
+        # provera da li je lokani brojac izbrojao do 165 - toliko je potrebno da se pređe ceo ekran
+        # ako jeste, setuju se nove koordinate i resetuje se brojač
+        if self.globalcounter23 > 165:
+            self.startposy3 = self.rec2.y()
+            self.startposx3 = self.rec2.x()
+            self.label14.hide()
+            self.globalcounter23 = 1
+        else:
+            # u običnim prolazima raketa se samo pomera za po 11 jedinica po x osi
+            self.label14.show()
+            self.label14.setGeometry(self.startposx3, self.startposy3, self.rec14.width(), self.rec14.height())
+            self.startposx3 += 11
+
+    # metoda za kretanje igrača
+    def __update_position__(self, key):
+
+        rec1 = self.label1.geometry()
+        rec2 = self.label2.geometry()
+        self.rec2 = self.label2.geometry()
+
+        # u zavisnosti od pritisnutog dugmeta igrač(svemirski brod) se pomera za 5 po određenoj osi
+        # metoda se poziva iz treda sve dok je dugme pritisnuto u intervalima od po 0.01 ms
+        if key == Qt.Key_Right:
+            self.label1.setGeometry(rec1.x() + 5, rec1.y(), rec1.width(), rec1.height())
+        elif key == Qt.Key_Down:
+            self.label1.setGeometry(rec1.x(), rec1.y() + 5, rec1.width(), rec1.height())
+        elif key == Qt.Key_Up:
+            self.label1.setGeometry(rec1.x(), rec1.y() - 5, rec1.width(), rec1.height())
+        elif key == Qt.Key_Left:
+            self.label1.setGeometry(rec1.x() - 5, rec1.y(), rec1.width(), rec1.height())
+
+        # kretanje drugog igrača
+        if key == Qt.Key_D:
+            self.label2.setGeometry(rec2.x() + 5, rec2.y(), rec2.width(), rec2.height())
+        elif key == Qt.Key_S:
+            self.label2.setGeometry(rec2.x(), rec2.y() + 5, rec2.width(), rec2.height())
+        elif key == Qt.Key_W:
+            self.label2.setGeometry(rec2.x(), rec2.y() - 5, rec2.width(), rec2.height())
+        elif key == Qt.Key_A:
+            self.label2.setGeometry(rec2.x() - 5, rec2.y(), rec2.width(), rec2.height())
+
+        self.rec2 = self.label2.geometry()
 
 
 # Главни програм...
