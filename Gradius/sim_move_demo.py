@@ -276,6 +276,72 @@ class SimMoveDemo(QWidget):
 
         self.rec2 = self.label2.geometry()
 
+    def fire2(self):
+        print('RAKETA2')
+
+        if abs(self.label13.x() - self.label1.x()) < 40 and abs(self.label13.y() - self.label1.y()) < 40:
+            self.label1.hide()
+        if abs(self.label13.x() - self.label3.x()) < 40 and abs(self.label13.y() - self.label3.y()) < 40:
+            self.label3.hide()
+        if abs(self.label13.x() - self.label4.x()) < 40 and abs(self.label13.y() - self.label4.y()) < 40:
+            self.label4.hide()
+        if abs(self.label13.x() - self.label5.x()) < 40 and abs(self.label13.y() - self.label5.y()) < 40:
+            self.label5.hide()
+        if abs(self.label13.x() - self.label6.x()) < 40 and abs(self.label13.y() - self.label6.y()) < 40:
+            self.label6.hide()
+        if abs(self.label13.x() - self.label7.x()) < 40 and abs(self.label13.y() - self.label7.y()) < 40:
+            self.label7.hide()
+
+        if self.globalcounter2 == 0:
+            self.startposx2 = self.rec2.x()
+            self.startposy2 = self.rec2.y()
+        self.globalcounter2 = 1
+
+        self.globalcounter22 += 1
+        if self.globalcounter22 > 165:
+            self.startposy2 = self.rec2.y()
+            self.startposx2 = self.rec2.x()
+            self.label13.hide()
+            self.globalcounter22 = 1
+        else:
+            self.label13.show()
+            self.label13.setGeometry(self.startposx2, self.startposy2, self.rec13.width(), self.rec13.height())
+            self.startposx2 += 11
+
+    def fire(self):
+        print('RAKETA1')
+
+        self.rec8 = self.label8.geometry()
+
+        if abs(self.label8.x() - self.label1.x()) < 40 and abs(self.label8.y() - self.label1.y()) < 40:
+            self.label1.hide()
+        if abs(self.label8.x() - self.label3.x()) < 40 and abs(self.label8.y() - self.label3.y()) < 40:
+            self.label3.hide()
+        if abs(self.label8.x() - self.label4.x()) < 40 and abs(self.label8.y() - self.label4.y()) < 40:
+            self.label4.hide()
+        if abs(self.label8.x() - self.label5.x()) < 40 and abs(self.label8.y() - self.label5.y()) < 40:
+            self.label5.hide()
+        if abs(self.label8.x() - self.label6.x()) < 40 and abs(self.label8.y() - self.label6.y()) < 40:
+            self.label6.hide()
+        if abs(self.label8.x() - self.label7.x()) < 40 and abs(self.label8.y() - self.label7.y()) < 40:
+            self.label7.hide()
+
+        if self.globalcounter1 == 0:
+            self.startposx = self.rec2.x()
+            self.startposy = self.rec2.y()
+        self.globalcounter1 = 1
+
+        self.globalcounter21 += 1
+        if self.globalcounter21 > 165:
+            self.startposy = self.rec2.y()
+            self.startposx = self.rec2.x()
+            self.label8.hide()
+            self.globalcounter21 = 1
+        else:
+            self.label8.show()
+            self.label8.setGeometry(self.startposx, self.startposy, self.rec8.width(), self.rec8.height())
+            self.startposx += 11
+
 
 # Главни програм...
 if __name__ == '__main__':
