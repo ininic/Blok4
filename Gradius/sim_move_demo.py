@@ -208,7 +208,7 @@ class SimMoveDemo(QWidget):
 
 
 
-# Главни програм
+# Главни програм...
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = SimMoveDemo()
