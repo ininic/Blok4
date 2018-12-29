@@ -344,160 +344,160 @@ class SimMoveDemo(QWidget):
 
 
 # metoda koja omogućava kretanje svemiraca i reljefa(stena)
-def send(self,):
-    print('Hello from proccess!')
-    # početne pozicije elemenata
-    a = self.rec3.x()
-    b = self.rec4.x()
-    c = self.rec4.x()
-    d = self.rec4.x()
-    e = self.rec4.x()
-    f = self.rec4.x()
-    g = self.rec9.x()
-    h = self.rec10.x()
-    i = self.rec11.x()
-    j = self.rec12.x()
+    def send(self,):
+        print('Hello from proccess!')
+        # početne pozicije elemenata
+        a = self.rec3.x()
+        b = self.rec4.x()
+        c = self.rec4.x()
+        d = self.rec4.x()
+        e = self.rec4.x()
+        f = self.rec4.x()
+        g = self.rec9.x()
+        h = self.rec10.x()
+        i = self.rec11.x()
+        j = self.rec12.x()
 
-    k = self.rec3.x()
-    m = self.rec4.x()
-    n = self.rec5.x()
-    o = self.rec6.x()
-    p = self.rec7.x()
-    r = self.rec8.x()
-    s = self.rec9.x()
-    for x in range(0, 12715):
-        # postavke brzina kretanja određenih elemenata
-        a -= 2
-        b -= 2
-        c -= 1
-        d -= 2
-        e -= 3
-        f -= 1
-        g -= 1
-        h -= 1
-        i -= 1
-        j -= 1
-        k -= 7
-        m -= 7
-        n -= 7
-        o -= 7
-        p -= 7
-        r -= 7
-        s -= 7
-
-
-        # kretanje svemiraca, koji se pojavljuju iznova ako su ubijeni, odnosno "sakriveni" (isHidden)
-        self.label3.setGeometry(a, self.rec3.y(), self.rec3.width(), self.rec3.height())
-        if x % 500 == 0:
-            k = a
-        self.label15.setGeometry(k, self.rec3.y(), self.rec15.width(), self.rec15.height())
-        if self.label3.isHidden():
-            self.label3.setGeometry(2000, self.rec3.y(), self.rec3.width(), self.rec3.height())
-            self.label3.show()
-            a = 2000
-
-        self.label4.setGeometry(b, self.rec4.y(), self.rec4.width(), self.rec4.height())
-        if x % 550 == 0:
-            m = b
-        self.label16.setGeometry(m, self.rec4.y(), self.rec16.width(), self.rec16.height())
-        if self.label4.isHidden():
-            self.label4.setGeometry(2000, self.rec4.y(), self.rec4.width(), self.rec4.height())
-            self.label4.show()
-            b = 2000
-
-        self.label5.setGeometry(c, self.rec5.y(), self.rec5.width(), self.rec5.height())
-        if x % 450 == 0:
-            n = c
-        self.label17.setGeometry(n, self.rec5.y(), self.rec17.width(), self.rec17.height())
-        if self.label5.isHidden():
-            self.label5.setGeometry(2000, self.rec5.y(), self.rec5.width(), self.rec5.height())
-            self.label5.show()
-            c = 2000
+        k = self.rec3.x()
+        m = self.rec4.x()
+        n = self.rec5.x()
+        o = self.rec6.x()
+        p = self.rec7.x()
+        r = self.rec8.x()
+        s = self.rec9.x()
+        for x in range(0, 12715):
+            # postavke brzina kretanja određenih elemenata
+            a -= 2
+            b -= 2
+            c -= 1
+            d -= 2
+            e -= 3
+            f -= 1
+            g -= 1
+            h -= 1
+            i -= 1
+            j -= 1
+            k -= 7
+            m -= 7
+            n -= 7
+            o -= 7
+            p -= 7
+            r -= 7
+            s -= 7
 
 
-        self.label6.setGeometry(d, self.rec6.y(), self.rec6.width(), self.rec6.height())
-        if x % 600 == 0:
-            o = d
-        self.label18.setGeometry(o, self.rec6.y(), self.rec18.width(), self.rec18.height())
-        if self.label6.isHidden():
-            self.label6.setGeometry(2000, self.rec6.y(), self.rec6.width(), self.rec6.height())
-            self.label6.show()
-            d = 2000
-        self.label7.setGeometry(e, self.rec7.y(), self.rec7.width(), self.rec7.height())
-        if self.label7.isHidden():
-            self.label7.setGeometry(2000, self.rec7.y(), self.rec7.width(), self.rec7.height())
-            self.label7.show()
-            e = 2000
-        self.label1.setGeometry(f, self.rec1.y(), self.rec1.width(), self.rec1.height())
-        if self.label1.isHidden():
-            self.label1.setGeometry(2000, self.rec1.y(), self.rec1.width(), self.rec1.height())
-            self.label1.show()
-            f = 2000
+            # kretanje svemiraca, koji se pojavljuju iznova ako su ubijeni, odnosno "sakriveni" (isHidden)
+            self.label3.setGeometry(a, self.rec3.y(), self.rec3.width(), self.rec3.height())
+            if x % 500 == 0:
+                k = a
+            self.label15.setGeometry(k, self.rec3.y(), self.rec15.width(), self.rec15.height())
+            if self.label3.isHidden():
+                self.label3.setGeometry(2000, self.rec3.y(), self.rec3.width(), self.rec3.height())
+                self.label3.show()
+                a = 2000
 
-        # kretanje stena, koje se pojavljuju iznova nakon što stignu do ivice ekrana
-        self.label9.setGeometry(g, self.rec9.y(), self.rec9.width(), self.rec9.height())
-        self.rec9 = self.label9.geometry()
-        if self.rec9.x() < -300:
-            self.label9.hide()
+            self.label4.setGeometry(b, self.rec4.y(), self.rec4.width(), self.rec4.height())
+            if x % 550 == 0:
+                m = b
+            self.label16.setGeometry(m, self.rec4.y(), self.rec16.width(), self.rec16.height())
+            if self.label4.isHidden():
+                self.label4.setGeometry(2000, self.rec4.y(), self.rec4.width(), self.rec4.height())
+                self.label4.show()
+                b = 2000
 
-        if self.label9.isHidden():
-            self.label9.setGeometry(1600, self.rec9.y(), self.rec9.width(), self.rec9.height())
-            self.label9.show()
-            g = 1600
+            self.label5.setGeometry(c, self.rec5.y(), self.rec5.width(), self.rec5.height())
+            if x % 450 == 0:
+                n = c
+            self.label17.setGeometry(n, self.rec5.y(), self.rec17.width(), self.rec17.height())
+            if self.label5.isHidden():
+                self.label5.setGeometry(2000, self.rec5.y(), self.rec5.width(), self.rec5.height())
+                self.label5.show()
+                c = 2000
 
-        self.label10.setGeometry(h, self.rec10.y(), self.rec10.width(), self.rec10.height())
-        self.rec10 = self.label10.geometry()
-        if self.rec10.x() < -300:
-            self.label10.hide()
 
-        if self.label10.isHidden():
-            self.label10.setGeometry(1600, self.rec10.y(), self.rec10.width(), self.rec10.height())
-            self.label10.show()
-            h = 1600
+            self.label6.setGeometry(d, self.rec6.y(), self.rec6.width(), self.rec6.height())
+            if x % 600 == 0:
+                o = d
+            self.label18.setGeometry(o, self.rec6.y(), self.rec18.width(), self.rec18.height())
+            if self.label6.isHidden():
+                self.label6.setGeometry(2000, self.rec6.y(), self.rec6.width(), self.rec6.height())
+                self.label6.show()
+                d = 2000
+            self.label7.setGeometry(e, self.rec7.y(), self.rec7.width(), self.rec7.height())
+            if self.label7.isHidden():
+                self.label7.setGeometry(2000, self.rec7.y(), self.rec7.width(), self.rec7.height())
+                self.label7.show()
+                e = 2000
+            self.label1.setGeometry(f, self.rec1.y(), self.rec1.width(), self.rec1.height())
+            if self.label1.isHidden():
+                self.label1.setGeometry(2000, self.rec1.y(), self.rec1.width(), self.rec1.height())
+                self.label1.show()
+                f = 2000
 
-        self.label11.setGeometry(i, self.rec11.y(), self.rec11.width(), self.rec11.height())
-        self.rec11 = self.label11.geometry()
-        if self.rec11.x() < -300:
-            self.label11.hide()
+            # kretanje stena, koje se pojavljuju iznova nakon što stignu do ivice ekrana
+            self.label9.setGeometry(g, self.rec9.y(), self.rec9.width(), self.rec9.height())
+            self.rec9 = self.label9.geometry()
+            if self.rec9.x() < -300:
+                self.label9.hide()
 
-        if self.label11.isHidden():
-            self.label11.setGeometry(1600, self.rec11.y(), self.rec11.width(), self.rec11.height())
-            self.label11.show()
-            i = 1600
+            if self.label9.isHidden():
+                self.label9.setGeometry(1600, self.rec9.y(), self.rec9.width(), self.rec9.height())
+                self.label9.show()
+                g = 1600
 
-        self.label12.setGeometry(j, self.rec12.y(), self.rec12.width(), self.rec12.height())
-        self.rec12 = self.label12.geometry()
-        if self.rec12.x() < -300:
-            self.label12.hide()
+            self.label10.setGeometry(h, self.rec10.y(), self.rec10.width(), self.rec10.height())
+            self.rec10 = self.label10.geometry()
+            if self.rec10.x() < -300:
+                self.label10.hide()
 
-        if self.label12.isHidden():
-            self.label12.setGeometry(1600, self.rec12.y(), self.rec12.width(), self.rec12.height())
-            self.label12.show()
-            j = 1600
+            if self.label10.isHidden():
+                self.label10.setGeometry(1600, self.rec10.y(), self.rec10.width(), self.rec10.height())
+                self.label10.show()
+                h = 1600
 
-        # proverava se da li je svemirski brod udario vanzemaljca
-        # i ako jeste, svemirac nestaje, a igrač gubi život.
-        if abs(self.label1.x() - self.label2.x()) < 80 and abs(self.label1.y() - self.label2.y()) < 60:
-            self.label1.hide()
+            self.label11.setGeometry(i, self.rec11.y(), self.rec11.width(), self.rec11.height())
+            self.rec11 = self.label11.geometry()
+            if self.rec11.x() < -300:
+                self.label11.hide()
 
-        if abs(self.label3.x() - self.label2.x()) < 80 and abs(self.label3.y() - self.label2.y()) < 60:
-            self.label3.hide()
+            if self.label11.isHidden():
+                self.label11.setGeometry(1600, self.rec11.y(), self.rec11.width(), self.rec11.height())
+                self.label11.show()
+                i = 1600
 
-        if abs(self.label4.x() - self.label2.x()) < 80 and abs(self.label4.y() - self.label2.y()) < 60:
-            self.label4.hide()
+            self.label12.setGeometry(j, self.rec12.y(), self.rec12.width(), self.rec12.height())
+            self.rec12 = self.label12.geometry()
+            if self.rec12.x() < -300:
+                self.label12.hide()
 
-        if abs(self.label5.x() - self.label2.x()) < 80 and abs(self.label5.y() - self.label2.y()) < 60:
-            self.label5.hide()
+            if self.label12.isHidden():
+                self.label12.setGeometry(1600, self.rec12.y(), self.rec12.width(), self.rec12.height())
+                self.label12.show()
+                j = 1600
 
-        if abs(self.label6.x() - self.label2.x()) < 80 and abs(self.label6.y() - self.label2.y()) < 60:
-            self.label6.hide()
+            # proverava se da li je svemirski brod udario vanzemaljca
+            # i ako jeste, svemirac nestaje, a igrač gubi život.
+            if abs(self.label1.x() - self.label2.x()) < 80 and abs(self.label1.y() - self.label2.y()) < 60:
+                self.label1.hide()
 
-        if abs(self.label7.x() - self.label2.x()) < 80 and abs(self.label7.y() - self.label2.y()) < 60:
-            self.label7.hide()
+            if abs(self.label3.x() - self.label2.x()) < 80 and abs(self.label3.y() - self.label2.y()) < 60:
+                self.label3.hide()
 
-        # "čekanje" procesa
-        QtTest.QTest.qWait(5)
-    return
+            if abs(self.label4.x() - self.label2.x()) < 80 and abs(self.label4.y() - self.label2.y()) < 60:
+                self.label4.hide()
+
+            if abs(self.label5.x() - self.label2.x()) < 80 and abs(self.label5.y() - self.label2.y()) < 60:
+                self.label5.hide()
+
+            if abs(self.label6.x() - self.label2.x()) < 80 and abs(self.label6.y() - self.label2.y()) < 60:
+                self.label6.hide()
+
+            if abs(self.label7.x() - self.label2.x()) < 80 and abs(self.label7.y() - self.label2.y()) < 60:
+                self.label7.hide()
+
+            # "čekanje" procesa
+            QtTest.QTest.qWait(5)
+        return
 # Главни програм...
 if __name__ == '__main__':
     app = QApplication(sys.argv)
