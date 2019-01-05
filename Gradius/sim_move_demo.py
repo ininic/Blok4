@@ -202,8 +202,12 @@ class SimMoveDemo(QWidget):
         self.globalcounter21 = 0
         self.globalcounter22 = 0
         self.globalcounter23 = 0
+        rock1_startpos = self.rock1_rec.x()
+        rock2_startpos = self.rock2_rec.x()
+        rock3_startpos = self.rock3_rec.x()
+        rock4_startpos = self.rock4_rec.x()
 
-       
+
 
     # naslov prozora
         self.setWindowTitle('Sim Slide')
@@ -410,6 +414,11 @@ class SimMoveDemo(QWidget):
             r -= 7
             s -= 7
 
+            rock1_startpos -= (self.level * 0.3)
+            rock2_startpos -= (self.level * 0.3)
+            rock3_startpos -= (self.level * 0.3)
+            rock4_startpos -= (self.level * 0.3)
+
 
             # kretanje svemiraca, koji se pojavljuju iznova ako su ubijeni, odnosno "sakriveni" (isHidden)
             self.alien1_label.setGeometry(a, self.alien1_rec.y(), self.alien1_rec.width(), self.alien1_rec.height())
@@ -499,6 +508,55 @@ class SimMoveDemo(QWidget):
                 self.rock4_label.setGeometry(1600, self.rock4_rec.y(), self.rock4_rec.width(), self.rock4_rec.height())
                 self.rock4_label.show()
                 j = 1600
+
+                # kretanje stena, koje se pojavljuju iznova nakon što stignu do ivice ekrana - gornja strana ekrana
+                self.rock1_rot_label.setGeometry(rock1_startpos, self.rock1_rot_rec.y(), self.rock1_rot_rec.width(),
+                                                 self.rock1_rot_rec.height())
+                self.rock1_rot_rec = self.rock1_rot_label.geometry()
+                if self.rock1_rec.x() < -300:
+                    self.rock1_rot_label.hide()
+
+                if self.rock1_rot_label.isHidden():
+                    self.rock1_rot_label.setGeometry(1600, self.rock1_rot_rec.y(), self.rock1_rot_rec.width(),
+                                                     self.rock1_rot_rec.height())
+                    self.rock1_rot_label.show()
+                    rock1_startpos = 1600
+
+                self.rock2_rot_label.setGeometry(rock2_startpos, self.rock2_rot_rec.y(), self.rock2_rot_rec.width(),
+                                                 self.rock2_rot_rec.height())
+                self.rock2_rot_rec = self.rock2_rot_label.geometry()
+                if self.rock2_rot_rec.x() < -300:
+                    self.rock2_rot_label.hide()
+
+                if self.rock2_rot_label.isHidden():
+                    self.rock2_rot_label.setGeometry(1600, self.rock2_rot_rec.y(), self.rock2_rot_rec.width(),
+                                                     self.rock2_rot_rec.height())
+                    self.rock2_rot_label.show()
+                    rock2_startpos = 1600
+
+                self.rock3_rot_label.setGeometry(rock3_startpos, self.rock3_rot_rec.y(), self.rock3_rot_rec.width(),
+                                                 self.rock3_rot_rec.height())
+                self.rock3_rot_rec = self.rock3_rot_label.geometry()
+                if self.rock3_rot_rec.x() < -300:
+                    self.rock3_rot_label.hide()
+
+                if self.rock3_rot_label.isHidden():
+                    self.rock3_rot_label.setGeometry(1600, self.rock3_rot_rec.y(), self.rock3_rot_rec.width(),
+                                                     self.rock3_rot_rec.height())
+                    self.rock3_rot_label.show()
+                    rock3_startpos = 1600
+
+                self.rock4_rot_label.setGeometry(rock4_startpos, self.rock4_rot_rec.y(), self.rock4_rot_rec.width(),
+                                                 self.rock4_rot_rec.height())
+                self.rock4_rot_rec = self.rock4_rot_label.geometry()
+                if self.rock4_rot_rec.x() < -300:
+                    self.rock1_rot_label.hide()
+
+                if self.rock4_rot_label.isHidden():
+                    self.rock4_rot_label.setGeometry(1600, self.rock4_rot_rec.y(), self.rock4_rot_rec.width(),
+                                                     self.rock4_rot_rec.height())
+                    self.rock4_rot_label.show()
+                    rock4_startpos = 1600
 
             # proverava se da li je svemirski brod udario vanzemaljca
             # i ako jeste, svemirac nestaje, a igrač gubi život.
