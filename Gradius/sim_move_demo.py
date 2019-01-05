@@ -578,6 +578,19 @@ class SimMoveDemo(QWidget):
             if abs(self.alien5_label.x() - self.spaceship1_label.x()) < 80 and abs(self.alien5_label.y() - self.spaceship1_label.y()) < 60:
                 self.alien5_label.hide()
 
+            # udaranje o kamen
+
+            if abs((self.spaceship1_label.x() + 98) - (self.rock1_label.x() + 159)) < 159 and abs(
+                        (self.spaceship1_label.y() + 37) - (self.rock1_label.y() + 106)) < 106:
+                    self.spaceship1_label.setGeometry(0, 400, 196, 74)
+                    self.lives -= 1
+                #
+            if abs((self.spaceship1_label.x() + 98) - (self.rock2_label.x() + 94)) < 94 and abs(
+                        (self.spaceship1_label.y() + 37) - (self.rock2_label.y() + 79)) < 79:
+                    self.spaceship1_label.setGeometry(0, 400, 196, 74)
+                    self.lives -= 1
+
+
             # "čekanje" procesa
             QtTest.QTest.qWait(5)
         return
