@@ -23,6 +23,12 @@ class SimMoveDemo(QWidget):
         self.pix5 = QPixmap('rock2.png')
         self.pix6 = QPixmap('rock3.png')
         self.pix7 = QPixmap('rock4.png')
+
+
+        self.pix12 = QPixmap('rotrock1.png')
+        self.pix13 = QPixmap('rotrock2.png')
+        self.pix14 = QPixmap('rotrock3.png')
+        self.pix15 = QPixmap('rotrock4.png')
         self.pix8 = QPixmap('rocketa.png')
 
         # Objekti za manipulaciju u okviru GUI-a
@@ -120,6 +126,19 @@ class SimMoveDemo(QWidget):
         self.rock4_label.setPixmap(self.pix7)
         self.rock4_label.setGeometry(10, self.shape.height() - 300, 614, 500)
 
+        self.rock1_rot_label.setPixmap(self.pix12)
+        self.rock1_rot_label.setGeometry(1300, -80, 298, 213)
+
+        self.rock2_rot_label.setPixmap(self.pix13)
+        self.rock2_rot_label.setGeometry(1100, -40, 200, 175)
+
+        self.rock3_rot_label.setPixmap(self.pix14)
+        self.rock3_rot_label.setGeometry(600, -80, 502, 226)
+
+        self.rock4_rot_label.setPixmap(self.pix15)
+        self.rock4_rot_label.setGeometry(10, -140, 427, 288)
+
+
         self.rocket2_label.setPixmap(self.pix3)
         self.rocket2_label.setGeometry(-120, 11, 178, 77)
 
@@ -157,6 +176,10 @@ class SimMoveDemo(QWidget):
         self.rock2_rec = self.rock2_label.geometry()
         self.rock3_rec = self.rock3_label.geometry()
         self.rock4_rec = self.rock4_label.geometry()
+        self.rock1_rot_rec = self.rock1_rot_label.geometry()
+        self.rock2_rot_rec = self.rock2_rot_label.geometry()
+        self.rock3_rot_rec = self.rock3_rot_label.geometry()
+        self.rock4_rot_rec = self.rock4_rot_label.geometry()
         self.rocket2_rec = self.rocket2_label.geometry()
         self.rocket3_rec = self.rocket3_label.geometry()
         self.alien_missile1_rec = self.alien_missile1_label.geometry()
@@ -180,7 +203,9 @@ class SimMoveDemo(QWidget):
         self.globalcounter22 = 0
         self.globalcounter23 = 0
 
-        # naslov prozora
+       
+
+    # naslov prozora
         self.setWindowTitle('Sim Slide')
         self.show()
 
