@@ -53,7 +53,10 @@ class SimMoveDemo(QWidget):
         self.alien_missile5_label = QLabel(self)
         self.alien_min_label = QLabel(self)
 
-
+        self.rock1_rot_label = QLabel(self)
+        self.rock2_rot_label = QLabel(self)
+        self.rock3_rot_label = QLabel(self)
+        self.rock4_rot_label = QLabel(self)
 
 
         # maksimalna veliina prozora i inicijalizovanje UI-a
@@ -89,6 +92,9 @@ class SimMoveDemo(QWidget):
         print(self.shape.width())
         print(self.shape.height())
 
+        self.lives = 5
+        self.level = 1
+        self.score = 0
 
         self.spaceship2_label.setPixmap(self.pix1)
         self.spaceship2_label.setGeometry(1900, 80, 178, 77)
@@ -202,11 +208,16 @@ class SimMoveDemo(QWidget):
         self.globalcounter21 = 0
         self.globalcounter22 = 0
         self.globalcounter23 = 0
+
         rock1_startpos = self.rock1_rec.x()
         rock2_startpos = self.rock2_rec.x()
         rock3_startpos = self.rock3_rec.x()
         rock4_startpos = self.rock4_rec.x()
 
+        rock1_rot_startpos = self.rock1_rot_rec.x()
+        rock2_rot_startpos = self.rock2_rot_rec.x()
+        rock3_rot_startpos = self.rock3_rot_rec.x()
+        rock4_rot_startpos = self.rock4_rot_rec.x()
 
 
     # naslov prozora
@@ -382,10 +393,16 @@ class SimMoveDemo(QWidget):
         d = self.alien2_rec.x()
         e = self.alien2_rec.x()
         f = self.alien2_rec.x()
+
         g = self.rock1_rec.x()
         h = self.rock2_rec.x()
         i = self.rock3_rec.x()
         j = self.rock4_rec.x()
+
+        g_rot = self.rock1_rot_rec.x()
+        h_rot = self.rock2_rot_rec.x()
+        i_rot = self.rock3_rot_rec.x()
+        j_rot = self.rock4_rot_rec.x()
 
         k = self.alien1_rec.x()
         m = self.alien2_rec.x()
@@ -394,6 +411,13 @@ class SimMoveDemo(QWidget):
         p = self.alien5_rec.x()
         r = self.rocket1_rec.x()
         s = self.rock1_rec.x()
+
+        rock1_startpos = self.rock1_rec.x()
+        rock2_startpos = self.rock2_rec.x()
+        rock3_startpos = self.rock3_rec.x()
+        rock4_startpos = self.rock4_rec.x()
+
+
         for x in range(0, 12715):
             # postavke brzina kretanja određenih elemenata
             a -= 2
@@ -418,6 +442,11 @@ class SimMoveDemo(QWidget):
             rock2_startpos -= (self.level * 0.3)
             rock3_startpos -= (self.level * 0.3)
             rock4_startpos -= (self.level * 0.3)
+
+            #rock1_rot_startpos -= (self.level * 0.3)
+            #rock2_rot_startpos -= (self.level * 0.3)
+            #rock3_rot_startpos -= (self.level * 0.3)
+            #rock4_rot_startpos -= (self.level * 0.3)
 
 
             # kretanje svemiraca, koji se pojavljuju iznova ako su ubijeni, odnosno "sakriveni" (isHidden)
@@ -479,6 +508,17 @@ class SimMoveDemo(QWidget):
                 self.rock1_label.show()
                 g = 1600
 
+
+            self.rock1_rot_label.setGeometry(g, self.rock1_rot_rec.y(), self.rock1_rot_rec.width(), self.rock1_rot_rec.height() )
+            self.rock1_rot_rec = self.rock1_rot_label.geometry()
+            if self.rock1_rot_rec.x() < -300:
+                self.rock1_rot_label.hide()
+
+            if self.rock1_rot_label.isHidden():
+                self.rock1_rot_label.setGeometry(1600, self.rock1_rot_rec.y(), self.rock1_rot_rec.width(), self.rock1_rot_rec.height())
+                self.rock1_rot_label.show()
+                g = 1600
+
             self.rock2_label.setGeometry(h, self.rock2_rec.y(), self.rock2_rec.width(), self.rock2_rec.height())
             self.rock2_rec = self.rock2_label.geometry()
             if self.rock2_rec.x() < -300:
@@ -487,6 +527,16 @@ class SimMoveDemo(QWidget):
             if self.rock2_label.isHidden():
                 self.rock2_label.setGeometry(1600, self.rock2_rec.y(), self.rock2_rec.width(), self.rock2_rec.height())
                 self.rock2_label.show()
+                h = 1600
+
+            self.rock2_rot_label.setGeometry(h, self.rock2_rot_rec.y(), self.rock2_rot_rec.width(), self.rock2_rot_rec.height())
+            self.rock2_rot_rec = self.rock2_rot_label.geometry()
+            if self.rock2_rot_rec.x() < -300:
+                self.rock2_rot_label.hide()
+
+            if self.rock2_rot_label.isHidden():
+                self.rock2_rot_label.setGeometry(1600, self.rock2_rot_rec.y(), self.rock2_rot_rec.width(), self.rock2_rot_rec.height())
+                self.rock2_rot_label.show()
                 h = 1600
 
             self.rock3_label.setGeometry(i, self.rock3_rec.y(), self.rock3_rec.width(), self.rock3_rec.height())
@@ -499,6 +549,16 @@ class SimMoveDemo(QWidget):
                 self.rock3_label.show()
                 i = 1600
 
+            self.rock3_rot_label.setGeometry(i, self.rock3_rot_rec.y(), self.rock3_rot_rec.width(), self.rock3_rot_rec.height())
+            self.rock3_rec = self.rock3_rot_label.geometry()
+            if self.rock3_rec.x() < -300:
+                self.rock3_rot_label.hide()
+
+            if self.rock3_rot_label.isHidden():
+                self.rock3_rot_label.setGeometry(1600, self.rock3_rot_rec.y(), self.rock3_rot_rec.width(), self.rock3_rot_rec.height())
+                self.rock3_rot_label.show()
+                i = 1600
+
             self.rock4_label.setGeometry(j, self.rock4_rec.y(), self.rock4_rec.width(), self.rock4_rec.height())
             self.rock4_rec = self.rock4_label.geometry()
             if self.rock4_rec.x() < -300:
@@ -507,6 +567,17 @@ class SimMoveDemo(QWidget):
             if self.rock4_label.isHidden():
                 self.rock4_label.setGeometry(1600, self.rock4_rec.y(), self.rock4_rec.width(), self.rock4_rec.height())
                 self.rock4_label.show()
+                j = 1600
+
+
+            self.rock4_rot_label.setGeometry(j, self.rock4_rot_rec.y(), self.rock4_rot_rec.width(), self.rock4_rot_rec.height())
+            self.rock4_rot_rec = self.rock4_rot_label.geometry()
+            if self.rock4_rot_rec.x() < -300:
+                self.rock4_rot_label.hide()
+
+            if self.rock4_rot_label.isHidden():
+                self.rock4_rot_label.setGeometry(1600, self.rock4_rot_rec.y(), self.rock4_rot_rec.width(), self.rock4_rot_rec.height())
+                self.rock4_rot_label.show()
                 j = 1600
 
                 # kretanje stena, koje se pojavljuju iznova nakon što stignu do ivice ekrana - gornja strana ekrana
@@ -587,6 +658,39 @@ class SimMoveDemo(QWidget):
                 #
             if abs((self.spaceship1_label.x() + 98) - (self.rock2_label.x() + 94)) < 94 and abs(
                         (self.spaceship1_label.y() + 37) - (self.rock2_label.y() + 79)) < 79:
+                    self.spaceship1_label.setGeometry(0, 400, 196, 74)
+                    self.lives -= 1
+
+            if abs((self.spaceship1_label.x() + 98) - (self.rock3_label.x() + 159)) < 159 and abs(
+                        (self.spaceship1_label.y() + 37) - (self.rock3_label.y() + 106)) < 106:
+                    self.spaceship1_label.setGeometry(0, 400, 196, 74)
+                    self.lives -= 1
+
+            if abs((self.spaceship1_label.x() + 98) - (self.rock4_label.x() + 159)) < 159 and abs(
+                        (self.spaceship1_label.y() + 37) - (self.rock4_label.y() + 106)) < 106:
+                    self.spaceship1_label.setGeometry(0, 400, 196, 74)
+                    self.lives -= 1
+
+            if abs((self.spaceship1_label.x() + 98) - (self.rock1_rot_label.x() + 159)) < 159 and abs(
+                        (self.spaceship1_label.y() + 37) - (self.rock1_rot_label.y() + 106)) < 106:
+                    self.spaceship1_label.setGeometry(0, 400, 196, 74)
+                    self.lives -= 1
+
+
+            if abs((self.spaceship1_label.x() + 98) - (self.rock2_rot_label.x() + 159)) < 159 and abs(
+                        (self.spaceship1_label.y() + 37) - (self.rock2_rot_label.y() + 106)) < 106:
+                    self.spaceship1_label.setGeometry(0, 400, 196, 74)
+                    self.lives -= 1
+
+
+            if abs((self.spaceship1_label.x() + 98) - (self.rock3_rot_label.x() + 159)) < 159 and abs(
+                        (self.spaceship1_label.y() + 37) - (self.rock3_rot_label.y() + 106)) < 106:
+                    self.spaceship1_label.setGeometry(0, 400, 196, 74)
+                    self.lives -= 1
+
+
+            if abs((self.spaceship1_label.x() + 98) - (self.rock4_rot_label.x() + 159)) < 159 and abs(
+                        (self.spaceship1_label.y() + 37) - (self.rock4_rot_label.y() + 106)) < 106:
                     self.spaceship1_label.setGeometry(0, 400, 196, 74)
                     self.lives -= 1
 
