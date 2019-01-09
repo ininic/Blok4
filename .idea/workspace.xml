@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e4efd7be-a2f2-4ea8-88ce-339aaac8353b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/worker2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gradius/sim_move_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gradius/sim_move_demo.py" afterDir="false" />
     </list>
@@ -16,11 +17,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Gradius/sim_move_demo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="431">
-              <caret line="887" column="25" selection-start-line="887" selection-start-column="25" selection-end-line="887" selection-end-column="25" />
+            <state relative-caret-position="203">
+              <caret line="926" lean-forward="true" selection-start-line="926" selection-end-line="926" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/worker2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="11" column="23" lean-forward="true" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -37,8 +47,8 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="676" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="260" />
     <option name="width" value="697" />
     <option name="height" value="735" />
   </component>
@@ -59,6 +69,12 @@
               <item name="Blok4" type="b2602c69:ProjectViewProjectNode" />
               <item name="Blok4" type="462c0819:PsiDirectoryNode" />
               <item name="Gradius" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Blok4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Blok4" type="462c0819:PsiDirectoryNode" />
+              <item name="Gradius" type="462c0819:PsiDirectoryNode" />
+              <item name="venv" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -82,7 +98,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.sim_move_demo">
     <configuration name="sim_move_demo" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Blok4" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -104,9 +120,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="worker2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Blok4" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/worker2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.sim_move_demo" />
+        <item itemvalue="Python.worker2" />
       </list>
     </recent_temporary>
   </component>
@@ -132,7 +170,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.22712418" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22585924" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -147,10 +185,20 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Gradius/venv/worker2.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/worker2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="11" column="23" lean-forward="true" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Gradius/sim_move_demo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="887" column="25" selection-start-line="887" selection-start-column="25" selection-end-line="887" selection-end-column="25" />
+        <state relative-caret-position="203">
+          <caret line="926" lean-forward="true" selection-start-line="926" selection-end-line="926" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
