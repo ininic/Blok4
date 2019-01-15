@@ -1,0 +1,6 @@
+Dva nova projekta, klijentski i serverski, jedan igrac se ponasa
+kao server, drugi kao klijent. Radi 90% funkcionalnosti u odnosu
+na aplikaciju na jednom racunaru, takode nije optimizovana mrežna
+komunikacija(svaka konekcija u novoj niti)
+
+Google drive link: https://drive.google.com/open?id=1kSJ9UsW8OyV2SJW4bPZ8UYrdHtzY88Dc
