@@ -6,12 +6,12 @@ import time
 
 lock = threading.Lock()
 
-class Worker(QObject):
+class Worker2(QObject):
 
     # potrebni signali
-    newParams = pyqtSignal()
-    newParams2 = pyqtSignal()
-    newParams3 = pyqtSignal()
+    sig1 = pyqtSignal()
+    sig2 = pyqtSignal()
+    sig3 = pyqtSignal()
     def __init__(self):
         super().__init__()
 
@@ -30,19 +30,19 @@ class Worker(QObject):
         if br == 1:
             for i in range(165):
                 print(i, 'THREAD1:', threading.current_thread())
-                self.newParams.emit()
+                self.sig1.emit()
                 time.sleep(0.01)
             self.threadcounter -= 1
         if br == 0:
             for i in range(165):
                 print(i, 'THREAD2:', threading.current_thread())
-                self.newParams2.emit()
+                self.sig2.emit()
                 time.sleep(0.01)
             self.threadcounter -= 1
         if br == 2:
             for i in range(165):
                 print(i, 'THREAD3:', threading.current_thread())
-                self.newParams3.emit()
+                self.sig3.emit()
                 time.sleep(0.01)
             self.threadcounter -= 1
 
