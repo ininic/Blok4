@@ -2,7 +2,7 @@ import sys
 import threading
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QWidget, QLabel, QApplication, QDesktopWidget
+from PyQt5.QtWidgets import QWidget, QLabel, QApplication, QDesktopWidget, QFrame
 from PyQt5 import QtTest
 import multiprocessing as mp
 from key_notifier import KeyNotifier
@@ -33,6 +33,7 @@ class SimMoveDemo(QWidget):
         self.pix13 = QPixmap('rotrock2.png')
         self.pix14 = QPixmap('rotrock3.png')
         self.pix15 = QPixmap('rotrock4.png')
+        self.pix16 = QPixmap('DeusExMachina')
 
         # Objekti za manipulaciju u okviru GUI-a
 
@@ -86,6 +87,8 @@ class SimMoveDemo(QWidget):
         self.score2_label = QLabel(self)
         self.lives2_label = QLabel(self)
         self.level2_label = QLabel(self)
+
+        self.DeusEx_label = QLabel(self)
 
         self.spaceship_min_label.setStyleSheet("background-color:white;")
         self.alien_min_label.setStyleSheet("background-color:white;")
@@ -146,11 +149,18 @@ class SimMoveDemo(QWidget):
         self.score = 0
         self.lives2 = 5
 
+        self.DeusExMachinaType = 0
+        self.deuscounter = 0
+
+        self.player1_DeusExMachina = 0
+        self.player2_DeusExMachina = 0
+
+
         self.spaceship2_label.setPixmap(self.pix2)
-        self.spaceship2_label.setGeometry(0, 260, 196, 74)
+        self.spaceship2_label.setGeometry(15, 260, 196, 74)
 
         self.spaceship1_label.setPixmap(self.pix2)
-        self.spaceship1_label.setGeometry(0, 160, 196, 74)
+        self.spaceship1_label.setGeometry(15, 160, 196, 74)
 
         self.alien1_label.setPixmap(self.pix1)
         self.alien1_label.setGeometry(self.shape.width() * 2, 340, 178, 77)
@@ -283,6 +293,9 @@ class SimMoveDemo(QWidget):
 
         self.name2_label.setText("                              Играч 2")
         self.name2_label.setGeometry(self.shape.width() - 280, 10, 220, 20)
+
+        self.DeusEx_label.setPixmap(self.pix16)
+        self.DeusEx_label.setGeometry(8888, 8888, 374, 335)
 
         # preuzimanje koordinata labela
         self.spaceship2_rec = self.spaceship2_label.geometry()
@@ -846,7 +859,10 @@ class SimMoveDemo(QWidget):
         motion_missile_indicator5 = 1
         motion_missile_indicator6 = 1
         motion_missile_indicator7 = 1
-        for x in range(0, 77715):
+
+        counter1 = 0
+        counter2 = 0
+        for x in range(0, 177715):
             # prelazak na sledeci nivo na svakih deset poena, bonus poeni na prelazak na sledeci nivo
             if self.score % 80 == 0 and self.score > 0:
                 self.score += 1
@@ -860,6 +876,47 @@ class SimMoveDemo(QWidget):
                 self.score_label.setText(str(self.score))
                 self.score2_label.setText(str(self.score))
                 print('#######')
+
+            if x % 1000 == 0 and x > 0 and self.DeusExMachinaType == 0:
+                if random.randint(1, 2) == 1:
+                    self.DeusEx_label.setGeometry(random.randint(0, self.shape.width() - 160),
+                                                random.randint(100, self.shape.height() - 400), 374, 335)
+                    self.DeusExMachinaType = random.randint(1, 2)
+
+            if self.DeusExMachinaType == 1 or self.DeusExMachinaType == 2:
+                self.deuscounter += 1
+
+            if self.deuscounter > 1000:
+                self.DeusEx_label.setGeometry(8888, 8888, 374, 335)
+                self.DeusExMachinaType = 0
+                self.deuscounter = 0
+
+            if self.player1_DeusExMachina == 1 or self.player1_DeusExMachina == 2:
+                counter1 += 1
+            if counter1 == 2500:
+                self.player1_DeusExMachina = 0
+                counter1 = 0
+                self.spaceship1_label.setStyleSheet("""
+                                                                    QFrame, QLabel, QToolTip {
+                                                                        border-style: outset;
+                                                                        border-width: 0px;
+                                                                        border-color: white;
+                                                                        }
+                                                                    """)
+
+            if self.player2_DeusExMachina == 1 or self.player2_DeusExMachina == 2:
+                counter2 += 1
+            if counter2 == 2500:
+                self.player2_DeusExMachina = 0
+                counter2 = 0
+                self.spaceship2_label.setStyleSheet("""
+                                                                     QFrame, QLabel, QToolTip {
+                                                                         border-style: outset;
+                                                                         border-width: 0px;
+                                                                         border-color: white;
+                                                                         }
+                                                                     """)
+
             # postavke brzina kretanja određenih elemenata u zavisnosti od nivoa
             alien1_startpos -= (self.level * 0.3 + 1.2)
             if (self.score - ((self.level - 1) * 80)) > 3 or motion_indicator2 == 1:
@@ -1247,57 +1304,173 @@ class SimMoveDemo(QWidget):
             # proverava se da li je svemirski brod udario vanzemaljca
             # i ako jeste, svemirac nestaje, a igrač gubi život.
             # igrac 1
-            if abs(self.alien1_label.x() - self.spaceship1_label.x()) < 80 and abs(
-                    self.alien1_label.y() - self.spaceship1_label.y()) < 60:
-                self.alien1_label.hide()
-                self.lives -= 1
+            if self.player1_DeusExMachina == 1:
+                self.spaceship1_label.setFrameStyle(QFrame.Panel | QFrame.Raised)
+                self.spaceship1_label.setLineWidth(5)
+                self.spaceship1_label.setStyleSheet("""
+                                                    QFrame, QLabel, QToolTip {
+                                                        border-style: outset;
+                                                        border-width: 2px;
+                                                        border-color: green;
+                                                        }
+                                                    """)
+                if abs(self.alien1_label.x() - self.spaceship1_label.x()) < 80 and abs(
+                        self.alien1_label.y() - self.spaceship1_label.y()) < 60:
+                    self.alien1_label.hide()
+                    self.score += 1
 
-            if abs(self.alien2_label.x() - self.spaceship1_label.x()) < 80 and abs(
-                    self.alien2_label.y() - self.spaceship1_label.y()) < 60:
-                self.alien2_label.hide()
-                self.lives -= 1
+                if abs(self.alien2_label.x() - self.spaceship1_label.x()) < 80 and abs(
+                        self.alien2_label.y() - self.spaceship1_label.y()) < 60:
+                    self.alien2_label.hide()
+                    self.score += 1
 
-            if abs(self.alien3_label.x() - self.spaceship1_label.x()) < 80 and abs(
-                    self.alien3_label.y() - self.spaceship1_label.y()) < 60:
-                self.alien3_label.hide()
-                self.lives -= 1
+                if abs(self.alien3_label.x() - self.spaceship1_label.x()) < 80 and abs(
+                        self.alien3_label.y() - self.spaceship1_label.y()) < 60:
+                    self.alien3_label.hide()
+                    self.score += 1
 
-            if abs(self.alien4_label.x() - self.spaceship1_label.x()) < 80 and abs(
-                    self.alien4_label.y() - self.spaceship1_label.y()) < 60:
-                self.alien4_label.hide()
-                self.lives -= 1
+                if abs(self.alien4_label.x() - self.spaceship1_label.x()) < 80 and abs(
+                        self.alien4_label.y() - self.spaceship1_label.y()) < 60:
+                    self.alien4_label.hide()
+                    self.score += 1
 
-            if abs(self.alien5_label.x() - self.spaceship1_label.x()) < 80 and abs(
-                    self.alien5_label.y() - self.spaceship1_label.y()) < 60:
-                self.alien5_label.hide()
-                self.lives2 -= 1
+                if abs(self.alien5_label.x() - self.spaceship1_label.x()) < 80 and abs(
+                        self.alien5_label.y() - self.spaceship1_label.y()) < 60:
+                    self.alien5_label.hide()
+                    self.score += 1
+
+                if abs(self.alien6_label.x() - self.spaceship1_label.x()) < 80 and abs(
+                                self.alien6_label.y() - self.spaceship1_label.y()) < 60:
+                    self.alien6_label.hide()
+                    self.score += 1
+
+                if abs(self.alien7_label.x() - self.spaceship1_label.x()) < 80 and abs(
+                                self.alien7_label.y() - self.spaceship1_label.y()) < 60:
+                    self.alien7_label.hide()
+                    self.score += 1
+                self.score_label.setText(str(self.score))
+                self.score2_label.setText(str(self.score))
+
+            else:
+                if abs(self.alien1_label.x() - self.spaceship1_label.x()) < 80 and abs(
+                        self.alien1_label.y() - self.spaceship1_label.y()) < 60:
+                    self.alien1_label.hide()
+                    self.lives -= 1
+
+                if abs(self.alien2_label.x() - self.spaceship1_label.x()) < 80 and abs(
+                        self.alien2_label.y() - self.spaceship1_label.y()) < 60:
+                    self.alien2_label.hide()
+                    self.lives -= 1
+
+                if abs(self.alien3_label.x() - self.spaceship1_label.x()) < 80 and abs(
+                        self.alien3_label.y() - self.spaceship1_label.y()) < 60:
+                    self.alien3_label.hide()
+                    self.lives -= 1
+
+                if abs(self.alien4_label.x() - self.spaceship1_label.x()) < 80 and abs(
+                        self.alien4_label.y() - self.spaceship1_label.y()) < 60:
+                    self.alien4_label.hide()
+                    self.lives -= 1
+
+                if abs(self.alien5_label.x() - self.spaceship1_label.x()) < 80 and abs(
+                        self.alien5_label.y() - self.spaceship1_label.y()) < 60:
+                    self.alien5_label.hide()
+                    self.lives -= 1
+
+                if abs(self.alien6_label.x() - self.spaceship1_label.x()) < 80 and abs(
+                        self.alien6_label.y() - self.spaceship1_label.y()) < 60:
+                    self.alien6_label.hide()
+                    self.lives -= 1
+
+                if abs(self.alien7_label.x() - self.spaceship1_label.x()) < 80 and abs(
+                        self.alien7_label.y() - self.spaceship1_label.y()) < 60:
+                    self.alien7_label.hide()
+                    self.lives -= 1
+
 
             # igrac 2
-            if abs(self.alien1_label.x() - self.spaceship2_label.x()) < 80 and abs(
-                    self.alien1_label.y() - self.spaceship2_label.y()) < 60:
-                self.alien1_label.hide()
-                self.lives2 -= 1
+            if self.player2_DeusExMachina == 1:
+                self.spaceship2_label.setFrameStyle(QFrame.Panel | QFrame.Raised)
+                self.spaceship2_label.setLineWidth(5)
+                self.spaceship2_label.setStyleSheet("""
+                                                    QFrame, QLabel, QToolTip {
+                                                        border-style: outset;
+                                                        border-width: 2px;
+                                                        border-color: green;
+                                                        }
+                                                    """)
+                if abs(self.alien1_label.x() - self.spaceship2_label.x()) < 80 and abs(
+                        self.alien1_label.y() - self.spaceship2_label.y()) < 60:
+                    self.alien1_label.hide()
+                    self.score += 1
 
-            if abs(self.alien2_label.x() - self.spaceship2_label.x()) < 80 and abs(
-                    self.alien2_label.y() - self.spaceship2_label.y()) < 60:
-                self.alien2_label.hide()
-                self.lives2 -= 1
+                if abs(self.alien2_label.x() - self.spaceship2_label.x()) < 80 and abs(
+                        self.alien2_label.y() - self.spaceship2_label.y()) < 60:
+                    self.alien2_label.hide()
+                    self.score += 1
 
-            if abs(self.alien3_label.x() - self.spaceship2_label.x()) < 80 and abs(
-                    self.alien3_label.y() - self.spaceship2_label.y()) < 60:
-                self.alien3_label.hide()
-                self.lives2 -= 1
+                if abs(self.alien3_label.x() - self.spaceship2_label.x()) < 80 and abs(
+                        self.alien3_label.y() - self.spaceship2_label.y()) < 60:
+                    self.alien3_label.hide()
+                    self.score += 1
 
-            if abs(self.alien4_label.x() - self.spaceship2_label.x()) < 80 and abs(
-                    self.alien4_label.y() - self.spaceship2_label.y()) < 60:
-                self.alien4_label.hide()
-                self.lives2 -= 1
+                if abs(self.alien4_label.x() - self.spaceship2_label.x()) < 80 and abs(
+                        self.alien4_label.y() - self.spaceship2_label.y()) < 60:
+                    self.alien4_label.hide()
+                    self.score += 1
 
-            if abs(self.alien5_label.x() - self.spaceship2_label.x()) < 80 and abs(
-                    self.alien5_label.y() - self.spaceship2_label.y()) < 60:
-                self.alien5_label.hide()
-                self.lives2 -= 1
-            # kada svemirci stignu do ivice ekrana postaju sakriveni "hidden"
+                if abs(self.alien5_label.x() - self.spaceship2_label.x()) < 80 and abs(
+                        self.alien5_label.y() - self.spaceship2_label.y()) < 60:
+                    self.alien5_label.hide()
+                    self.score += 1
+
+                if abs(self.alien6_label.x() - self.spaceship2_label.x()) < 80 and abs(
+                        self.alien6_label.y() - self.spaceship2_label.y()) < 60:
+                    self.alien6_label.hide()
+                    self.score += 1
+
+                if abs(self.alien7_label.x() - self.spaceship2_label.x()) < 80 and abs(
+                        self.alien7_label.y() - self.spaceship2_label.y()) < 60:
+                    self.alien7_label.hide()
+                    self.score += 1
+
+                self.score_label.setText(str(self.score))
+                self.score2_label.setText(str(self.score))
+            else:
+                if abs(self.alien1_label.x() - self.spaceship2_label.x()) < 80 and abs(
+                        self.alien1_label.y() - self.spaceship2_label.y()) < 60:
+                    self.alien1_label.hide()
+                    self.lives2 -= 1
+
+                if abs(self.alien2_label.x() - self.spaceship2_label.x()) < 80 and abs(
+                        self.alien2_label.y() - self.spaceship2_label.y()) < 60:
+                    self.alien2_label.hide()
+                    self.lives2 -= 1
+
+                if abs(self.alien3_label.x() - self.spaceship2_label.x()) < 80 and abs(
+                        self.alien3_label.y() - self.spaceship2_label.y()) < 60:
+                    self.alien3_label.hide()
+                    self.lives2 -= 1
+
+                if abs(self.alien4_label.x() - self.spaceship2_label.x()) < 80 and abs(
+                        self.alien4_label.y() - self.spaceship2_label.y()) < 60:
+                    self.alien4_label.hide()
+                    self.lives2 -= 1
+
+                if abs(self.alien5_label.x() - self.spaceship2_label.x()) < 80 and abs(
+                        self.alien5_label.y() - self.spaceship2_label.y()) < 60:
+                    self.alien5_label.hide()
+                    self.lives2 -= 1
+
+                if abs(self.alien6_label.x() - self.spaceship2_label.x()) < 80 and abs(
+                                self.alien6_label.y() - self.spaceship2_label.y()) < 60:
+                    self.alien6_label.hide()
+                    self.lives2 -= 1
+
+                if abs(self.alien7_label.x() - self.spaceship2_label.x()) < 80 and abs(
+                                self.alien7_label.y() - self.spaceship2_label.y()) < 60:
+                    self.alien7_label.hide()
+                    self.lives2 -= 1            # kada svemirci stignu do ivice ekrana postaju sakriveni "hidden"
             # što će u sledećoj iteraciji biti indikator da se vrate na početne koordinate
             if self.alien1_label.x() < 0:
                 self.alien1_label.hide()
@@ -1479,14 +1652,29 @@ class SimMoveDemo(QWidget):
                 self.lives2 -= 1
                 self.spaceship2_label.setGeometry(0, 400, 196, 74)
 
+            # DeusExMachina
+            if abs((self.spaceship1_label.x() + 98) - (self.DeusEx_label.x() + 187)) < 100 and abs(
+                    (self.spaceship1_label.y() + 37) - (self.DeusEx_label.y() + 162)) < 100:
+                if self.player1_DeusExMachina == 0:
+                    self.DeusEx_label.setGeometry(9999, 9999, 374, 335)
+                    self.player1_DeusExMachina = self.DeusExMachinaType
+
+            if abs((self.spaceship2_label.x() + 98) - (self.DeusEx_label.x() + 187)) < 100 and abs(
+                    (self.spaceship2_label.y() + 37) - (self.DeusEx_label.y() + 162)) < 100:
+                if self.player2_DeusExMachina == 0:
+                    self.DeusEx_label.setGeometry(9999, 9999, 374, 335)
+                    self.player2_DeusExMachina = self.DeusExMachinaType
+
+
+
             self.lives_label.setText(str(self.lives))
             self.lives2_label.setText(str(self.lives2))
 
-            if self.lives < 0:
+            if self.lives < 1:
                 self.spaceship1_label.hide()
                 self.spaceship1_label.setGeometry(99999, 99999, self.spaceship1_label.width(),
                                                   self.spaceship1_label.height())
-            if self.lives2 < 0:
+            if self.lives2 < 1:
                 self.spaceship2_label.hide()
                 self.spaceship2_label.setGeometry(99999, 99999, self.spaceship2_label.width(),
                                                   self.spaceship2_label.height())
@@ -1503,24 +1691,54 @@ class SimMoveDemo(QWidget):
 
         # u zavisnosti od pritisnutog dugmeta igrač(svemirski brod) se pomera za 5 po određenoj osi
         # metoda se poziva iz treda sve dok je dugme pritisnuto u intervalima od po 0.01 ms
-        if key == Qt.Key_Right:
-            self.spaceship2_label.setGeometry(rec1.x() + 5, rec1.y(), rec1.width(), rec1.height())
-        elif key == Qt.Key_Down:
-            self.spaceship2_label.setGeometry(rec1.x(), rec1.y() + 5, rec1.width(), rec1.height())
-        elif key == Qt.Key_Up:
-            self.spaceship2_label.setGeometry(rec1.x(), rec1.y() - 5, rec1.width(), rec1.height())
-        elif key == Qt.Key_Left:
-            self.spaceship2_label.setGeometry(rec1.x() - 5, rec1.y(), rec1.width(), rec1.height())
+
+        if self.player2_DeusExMachina != 2:
+            if key == Qt.Key_Right:
+                if self.spaceship2_label.x() <= self.shape.width() - 174:
+                    self.spaceship2_label.setGeometry(rec1.x() + 5, rec1.y(), rec1.width(), rec1.height())
+            elif key == Qt.Key_Down:
+                self.spaceship2_label.setGeometry(rec1.x(), rec1.y() + 5, rec1.width(), rec1.height())
+            elif key == Qt.Key_Up:
+                self.spaceship2_label.setGeometry(rec1.x(), rec1.y() - 5, rec1.width(), rec1.height())
+            elif key == Qt.Key_Left:
+                if self.spaceship2_label.x() >= 0:
+                    self.spaceship2_label.setGeometry(rec1.x() - 5, rec1.y(), rec1.width(), rec1.height())
+        else:
+            if key == Qt.Key_Right:
+                if self.spaceship2_label.x() <= self.shape.width() - 174:
+                    self.spaceship2_label.setGeometry(rec1.x() + 1, rec1.y(), rec1.width(), rec1.height())
+            elif key == Qt.Key_Down:
+                self.spaceship2_label.setGeometry(rec1.x(), rec1.y() + 1, rec1.width(), rec1.height())
+            elif key == Qt.Key_Up:
+                self.spaceship2_label.setGeometry(rec1.x(), rec1.y() - 1, rec1.width(), rec1.height())
+            elif key == Qt.Key_Left:
+                if self.spaceship2_label.x() >= 0:
+                    self.spaceship2_label.setGeometry(rec1.x() - 1, rec1.y(), rec1.width(), rec1.height())
 
         # kretanje drugog igrača
-        if key == Qt.Key_D:
-            self.spaceship1_label.setGeometry(rec2.x() + 5, rec2.y(), rec2.width(), rec2.height())
-        elif key == Qt.Key_S:
-            self.spaceship1_label.setGeometry(rec2.x(), rec2.y() + 5, rec2.width(), rec2.height())
-        elif key == Qt.Key_W:
-            self.spaceship1_label.setGeometry(rec2.x(), rec2.y() - 5, rec2.width(), rec2.height())
-        elif key == Qt.Key_A:
-            self.spaceship1_label.setGeometry(rec2.x() - 5, rec2.y(), rec2.width(), rec2.height())
+        if self.player1_DeusExMachina != 2:
+            if key == Qt.Key_D:
+                if self.spaceship1_label.x() <= self.shape.width() - 174:
+                    self.spaceship1_label.setGeometry(rec2.x() + 5, rec2.y(), rec2.width(), rec2.height())
+            elif key == Qt.Key_S:
+                self.spaceship1_label.setGeometry(rec2.x(), rec2.y() + 5, rec2.width(), rec2.height())
+            elif key == Qt.Key_W:
+                self.spaceship1_label.setGeometry(rec2.x(), rec2.y() - 5, rec2.width(), rec2.height())
+            elif key == Qt.Key_A:
+                if self.spaceship1_label.x() >= 0:
+                    self.spaceship1_label.setGeometry(rec2.x() - 5, rec2.y(), rec2.width(), rec2.height())
+
+        else:
+            if key == Qt.Key_D:
+                if self.spaceship1_label.x() <= self.shape.width() - 174:
+                    self.spaceship1_label.setGeometry(rec2.x() + 1, rec2.y(), rec2.width(), rec2.height())
+            elif key == Qt.Key_S:
+                self.spaceship1_label.setGeometry(rec2.x(), rec2.y() + 1, rec2.width(), rec2.height())
+            elif key == Qt.Key_W:
+                self.spaceship1_label.setGeometry(rec2.x(), rec2.y() - 1, rec2.width(), rec2.height())
+            elif key == Qt.Key_A:
+                if self.spaceship1_label.x() >= 0:
+                    self.spaceship1_label.setGeometry(rec2.x() - 1, rec2.y(), rec2.width(), rec2.height())
 
         self.spaceship1_rec = self.spaceship1_label.geometry()
         self.spaceship2_rec = self.spaceship2_label.geometry()

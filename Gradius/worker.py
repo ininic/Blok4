@@ -4,6 +4,8 @@ from PyQt5.QtCore import QThread, QObject, pyqtSignal, pyqtSlot
 
 import time
 
+lock = threading.Lock()
+
 class Worker(QObject):
 
     # potrebni signali
@@ -19,6 +21,7 @@ class Worker(QObject):
         self.Time = time
         self.thread = QThread()
         self.moveToThread(self.thread)
+        self.threadcounter = 0
         # kada se nit startuje pozvace se funkcija paramUp
         self.thread.started.connect(self.paramUp)
 
@@ -26,19 +29,23 @@ class Worker(QObject):
     def sendsignal(self, br):
         if br == 1:
             for i in range(165):
-                print('THREAD1:', threading.current_thread())
+                print(i, 'THREAD1:', threading.current_thread())
                 self.newParams.emit()
                 time.sleep(0.01)
+            self.threadcounter -= 1
         if br == 0:
             for i in range(165):
-                print('THREAD2:', threading.current_thread())
+                print(i, 'THREAD2:', threading.current_thread())
                 self.newParams2.emit()
                 time.sleep(0.01)
+            self.threadcounter -= 1
         if br == 2:
             for i in range(165):
-                print('THREAD3:', threading.current_thread())
+                print(i, 'THREAD3:', threading.current_thread())
                 self.newParams3.emit()
                 time.sleep(0.01)
+            self.threadcounter -= 1
+
 
     def start(self):
         """
@@ -56,7 +63,7 @@ class Worker(QObject):
         while not self.is_done:
             time.sleep(0.001)
             # nit se kreira i poziva samo ako je dugme pritisnutow
-            if self.keyscount == 1:
+            if self.keyscount == 1 and self.threadcounter < 3:
                     if broj == 0:
                         broj = 1
                     elif broj == 1:
@@ -65,6 +72,8 @@ class Worker(QObject):
                         broj = 0
                     self.threadb = threading.Thread(target=self.sendsignal, args=(broj,))
                     self.threadb.start()
+                    self.threadcounter += 1
+                    print('brojac: ', self.threadcounter, self.keyscount)
                     self.keyscount -= 1
                     time.sleep(0.05)
 
